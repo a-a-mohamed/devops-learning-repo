@@ -1,0 +1,14 @@
+#!/bin/bash
+
+file_sort(){
+    directory_path=$1
+
+    if [ $# -eq 0 ]
+    then
+        echo "didnt pass anything in"
+    else
+        du -ah $directory_path/*.txt | sort -h
+    fi
+}
+
+file_sort ./Arena
