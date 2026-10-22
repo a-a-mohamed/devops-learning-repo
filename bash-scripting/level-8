@@ -1,0 +1,21 @@
+#!/bin/bash
+multi_file_searcher(){
+    local phrase=$1
+    local directory_path=$2
+
+    for file in $directory_path/*.log
+    do
+        if [ ! -f "$file" ]
+        then
+            continue
+        fi
+
+        if grep -q -- "$phrase" "$file" 
+        then
+            echo "$file"
+        fi
+    done
+
+
+
+}
