@@ -1,0 +1,10 @@
+#!/bin/bash
+
+monitor_directory(){
+    local directory_path="$1"
+    touch ./event.log
+    inotifywait -m -r -e create,modify,delete --timefmt '%H:%M:%S' --format '%T %e %f' "$directory_path" >> event.log
+}
+
+monitor_directory "./Battlefield"
+
