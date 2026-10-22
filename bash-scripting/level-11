@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+check_disk_space(){
+    local directory="$1"
+    local threshold="$2"
+    local total
+
+    total=$(du -s -B1 "$directory" | awk '{print $1}')
+
+    
+
+    if [ "$total" -gt "$threshold" ]
+    then
+       
+        echo "Exceeds threshold"
+    else
+        echo "Your within the threshold"
+    fi
+
+}
+
+check_disk_space ./Arena 10000
