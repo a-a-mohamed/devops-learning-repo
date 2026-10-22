@@ -1,0 +1,20 @@
+#!/bin/bash
+config_file_parser(){
+local input_file="$1"
+while IFS='=' read -r key value 
+do
+    if [[ -z "$key" ]]
+    then
+        continue
+    fi
+
+    if [[ "$key" == \#* ]]
+    then   
+        continue
+    fi
+
+    echo "Key: "$key" Value: "$value""
+done < "$input_file"
+}
+
+config_file_parser "./Arena/key_value.txt"
