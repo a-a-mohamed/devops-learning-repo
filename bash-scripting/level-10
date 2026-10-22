@@ -1,0 +1,52 @@
+#!/bin/bash
+
+mkdir Arena_Boss
+
+#originally i wanted to see if this worked but easier way
+# for ((i=1; i<=5; i++))
+# do
+#     touch file$i.txt
+# done
+
+#better way
+touch Arena_Boss/file{1..5}.txt
+
+for file in Arena_Boss/*
+do
+    #incase no matches
+    if [ ! -f "$file" ] 
+    then 
+        continue
+    fi
+
+    num_lines=$((10 + $RANDOM % 11))
+    for ((i=1; i<=num_lines; i++))
+    do
+        echo "Line $i" >> "$file"
+    done
+done
+
+
+stat -c '%s %n' Arena_Boss/* | sort -n
+
+mkdir Victory_Archive
+
+echo "Victory" >> Arena_Boss/file5.txt
+
+for file in Arena_Boss/*
+do
+     #incase no matches
+    if [ ! -f $file ] 
+    then 
+        continue
+    fi
+
+    if grep -q Victory $file
+    then
+        mv "$file" Victory_Archive
+    fi
+
+done
+
+
+
