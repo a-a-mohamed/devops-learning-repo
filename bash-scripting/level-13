@@ -1,0 +1,27 @@
+#!/bin/bash
+
+backup_script(){
+    local no_backups
+    local directory_to_back_up="$1"
+    local location="$2"
+
+    backup_array=("$location"/backup_*)
+    no_backups=${#backup_array[@]}
+
+    
+
+    if [ "$no_backups" -ge 5 ]
+    then
+        no_to_delete=$((no_backups - 4))
+        for ((i=0; i<no_to_delete ; i++))
+        do 
+            #remove the files
+            echo "would delete ${backup_array[i]}"
+        done
+    fi
+    
+    timestamp=$(date +%Y%m%d_%H%M%S)
+    cp -r "$directory_to_back_up" "$location/backup_$timestamp"
+    
+
+}

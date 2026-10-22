@@ -1,0 +1,15 @@
+# Application settings
+APP_NAME=Arena Boss
+PORT=8080
+DEBUG=true
+
+# Database settings
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=admin
+DB_PASSWORD=
+
+# Feature flags
+ENABLE_LOGGING=yes
+MAX_RETRIES=5
+WELCOME_MESSAGE=Welcome to the Arena!
