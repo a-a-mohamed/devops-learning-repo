@@ -1,0 +1,76 @@
+#!/bin/bash
+
+#- Backup the Arena directory and keep the last 3 backups
+
+boss_battle_3(){
+
+
+check_disk_space(){
+    df -h
+}
+
+show_system_uptime(){
+    uptime -p 
+    
+}
+
+backup(){
+local location="$1"
+backups_array=($location/backups_*)
+no_backups=${#backups_array[@]}
+
+if [ $no_backups -ge 3 ]
+then 
+    for((i=0 ; i<no_backups - 2 ; i++))
+    do
+        rm -r ${backups_array[i]}
+    done
+fi
+
+timestamp=$(date +'%Y%m%d_%H%M%S')
+cp -r ./Arena $location/backups_$timestamp
+}
+
+parse_config_file(){
+
+    while IFS='=' read  -r key value
+    do 
+        if [[ -z "$key" ]]
+        then 
+            continue
+        fi
+
+        if [[ "$key" == \#* ]]
+        then
+            continue
+        fi
+
+        echo "Value is : $value"
+
+    done < settings.conf
+}
+
+read -p "Enter ds for disk space , su for uptime or lu to list users: " task
+if [[ "$task" == "ds" ]]
+then 
+    check_disk_space
+elif [[ "$task" == "su" ]]
+then 
+    show_system_uptime
+elif [[ "$task" == "b" ]]
+then  
+    backup "$HOME/backups"
+elif
+    [[ "$task" == "p" ]]
+then   
+    parse_config_file
+else
+    echo "Invalid command "
+
+fi
+}
+
+boss_battle_3
+
+
+
