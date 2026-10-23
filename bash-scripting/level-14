@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#function to check diskspace
+#use df -h command to check diskspace of system rather than diskspace of  directory ( through du)
+
+interactive(){
+
+check_disk_space(){
+    df -h
+}
+
+show_system_uptime(){
+    uptime -p 
+    
+}
+
+list_users(){
+    awk -F: '{print $1}' /etc/passwd
+}
+
+read -p "Enter ds for disk space , su for uptime or lu to list users: " task
+if [[ "$task" == "ds" ]]
+then 
+    check_disk_space
+elif [[ "$task" == "su" ]]
+then 
+    show_system_uptime
+elif [[ "$task" == "lu" ]]
+then 
+    list_users
+
+else
+    echo "incorrect command entered"
+
+fi
+
+}
+
+interactive

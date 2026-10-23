@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir file_storage
+touch file_storage/file{1..10}.txt
